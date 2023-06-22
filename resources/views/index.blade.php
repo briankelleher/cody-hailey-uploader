@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hailey & Cody</title>
+    @vite('resources/scss/main.scss')
 </head>
 <body>
     <div id="app">
-        <image-upload></image-upload>
+        <App></App>
     </div>
     @vite('resources/js/app.js')
 </body>

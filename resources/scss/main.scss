@@ -1,0 +1,15 @@
+// Override default variables
+$primary: #00897b;
+$min-contrast-ratio: 3;
+
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+
+
+.preview-area {
+    background-color: lighten($secondary, 60%);
+    border: 2px solid $secondary;
+    border-radius: 5px;
+    height: 100%;
+    vertical-align: middle;
+}

@@ -1,10 +1,10 @@
 import './bootstrap';
 
 import { createApp } from 'vue/dist/vue.esm-bundler.js';
-import ImageUpload from './components/FileUploader.vue';
+import App from './App.vue';
 
 createApp({
   components: {
-    ImageUpload
+    App
   }
 }).mount('#app');

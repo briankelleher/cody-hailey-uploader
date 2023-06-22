@@ -17,7 +17,7 @@ class ImageController extends Controller
     {
         // Validate the uploaded file
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:16776',
         ]);
         
         // Get the uploaded file
@@ -25,6 +25,12 @@ class ImageController extends Controller
         
         // Upload the file to Google Drive
         $googleDriveFileId = $this->uploadToGoogleDrive($file);
+
+        if ( !$googleDriveFileId ) {
+            return response()->json([
+                'message' => 'Image upload failed.'
+            ], 500);
+        }
         
         // Save information to the database
         $image = new Image();
@@ -34,7 +40,10 @@ class ImageController extends Controller
         $image->save();
         
         // Return a response
-        return response()->json(['message' => 'Image uploaded successfully.']);
+        return response()->json([
+            'message' => 'Image uploaded successfully.',
+            'data' => $image
+        ]);
     }
     
     private function uploadToGoogleDrive($file)
@@ -55,8 +64,8 @@ class ImageController extends Controller
             
             // Upload the file to Google Drive
             $fileMetadata = new Drive\DriveFile([
-                // 'name' => $file->getClientOriginalName(),
-                'name' => 'test.jpg',
+                'name' => $file->getClientOriginalName(),
+                // 'name' => 'test.jpg',
                 'parents' => [$folderId],
             ]);
             
