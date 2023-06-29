@@ -1,7 +1,7 @@
-.git
-.github
+.git/
+.github/
 .gitignore
-node_modules
+node_modules/
 .env
 .env*
 .editorconfig
@@ -12,7 +12,7 @@ vite.config.json
 README.md
 phpunit.xml
 docker-compose.yml
-storage
+storage/
 DOCKER_ENV
 Docker*
 docker*
