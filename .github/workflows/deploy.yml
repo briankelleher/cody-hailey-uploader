@@ -31,13 +31,14 @@ jobs:
           php_version: "8.1"
           args: --optimize-autoloader
 
+      - name: Zip artifact for deployment
+        run: zip release.zip ./* -r -x "node_modules/" -x ".github/" -x ".git/"
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: deploy-package
-          path: |
-            ./
-            !node_modules
+          path: release.zip
     
   # deploy:
   #   name: Deploy
