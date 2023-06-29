@@ -22,8 +22,14 @@ jobs:
         with:
           node-version: 18
 
-      - name: Build project
+      - name: Build Project Frontend
         run: npm ci && npm run build
+
+      - name: Install Composer Dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.1"
+          args: --optimize-autoloader
 
       - name: Upload artifact
         uses: actions/upload-artifact@v3
