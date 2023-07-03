@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [function () {
-    return view('index');
+    return view('index', [
+        'backup_email' => env('BACKUP_EMAIL') ?? 'example@example.com',
+    ]);
 }]);

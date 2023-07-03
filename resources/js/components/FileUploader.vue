@@ -29,24 +29,13 @@
         Upload
       </button>
     </div>
-    <div class="file-previews">
-      <p>{{ filePreviewsLabel }}</p>
-
-      <div class="row">
-        <div class="col-12 col-md-6 mb-3" v-for="file in uploadedFiles" :key="file.name">
-          <file-preview :file="file"></file-preview>
-        </div>
-      </div>
-      
-    </div>
   </div>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
 import FilePreview from './FilePreview.vue';
-
-const uploadedFiles = ref([]);
+import { store } from '../store.js';
 
 const selectedFile = ref(null);
 
@@ -57,16 +46,6 @@ const fileInput = ref(null);
 const progress = ref(0);
 
 const errorText = ref(null);
-
-const filePreviewsLabel = computed(() => {
-  if (uploadedFiles.value.length === 0) {
-    return 'No photos added.';
-  } else if (uploadedFiles.value.length === 1) {
-    return '1 photo added!';
-  } else {
-    return `${uploadedFiles.value.length} photos added!`;
-  }
-})
 
 const selectedFilePreview = computed(() => {
   if (selectedFile.value) {
@@ -124,9 +103,9 @@ const uploadImage = () => {
     // Handle the response as needed
     const file_result = response.data.data;
     file_result.preview = selectedFilePreview.value;
-    uploadedFiles.value.push(file_result);
+    store.addFile(file_result);
     selectedFile.value = null;
-    fileInput.value = null;
+    fileInput.value.value = null;
     uploading.value = false;
     progress.value = 0;
   })
