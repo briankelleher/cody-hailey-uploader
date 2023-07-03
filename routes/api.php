@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ErrorTestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,5 @@ use App\Http\Controllers\ImageController;
 */
 
 Route::post('/upload', [ImageController::class, 'upload']);
+
+Route::post('/test413', [ErrorTestController::class, 'test413']);
